@@ -1,0 +1,17 @@
+------------------------------------------------------------------------ 
+Prediction parameters: 
+ ------------------------------------------------------------------------ 
+Branch prediction type: GShared
+BHT_t size (entries): 16
+Global history register size: 4
+Private history register size: 3
+------------------------------------------------------------------------ 
+Simulation results: 
+------------------------------------------------------------------------
+Number of branch: 16416279
+Number of correct prediction of taken branches: 5285814
+Number of incorrect prediction of taken branches: 740528
+Correct prediction of not taken branches: 9464156
+Incorrect prediction of not taken branches: 925781
+Percentage of correct predictions: 89.8497%
+Time running: 28
