@@ -46,7 +46,7 @@ void bimodal_F::begin_prediction_B(){
 
     //std::cout << "Address " << pc_dd << " mapped to " << pc_mask_access << " with mask " << mask << std::endl;
 
-    if (Table[pc_mask_access] <= 1) {
+    if (Table[pc_mask_access] <= 0) { 
       if (result == 'N') {
         counter_N++;
       } else {
