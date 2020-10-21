@@ -44,9 +44,9 @@ void bimodal_F::begin_prediction_B(){
 
     long pc_mask_access = pc_dd & mask;
 
-    //std::cout << "Address " << pc_dd << " mapped to " << pc_mask_access << " with mask " << mask << std::endl;
+    //std::cout << "Address " << pc_dd << " mapped to " << pc_mask_access << " with mask " << mask << " and result " << result << std::endl;
 
-    if (Table[pc_mask_access] <= 0) { 
+    if (Table[pc_mask_access] <= 1) { 
       if (result == 'N') {
         counter_N++;
       } else {
@@ -78,7 +78,7 @@ void bimodal_F::begin_prediction_B(){
 
   time(&final_time); // capture time
   int ex_time = difftime(final_time,current_time);
-  float percentage = (float)(counter_T + counter_N)*(float)(100/((float)num_branch)); // for all lines
+  float percentage = ((float)(counter_T + counter_N)*(float)100)/(float)num_branch; // for all lines
 
   /////////////////////Results////////////////////////////////////////////////////
   results_file << "------------------------------------------------------------------------ \n";
