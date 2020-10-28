@@ -50,13 +50,13 @@ void bimodal_F::begin_prediction_B(){
       if (result == 'N') {
         counter_N++;
       } else {
-        counter_miss_N++;
+        counter_miss_T++;
       }
     } else {
       if (result == 'T') {
         counter_T++;
       } else {
-        counter_miss_T++;
+        counter_miss_N++;
       }
     }
 
@@ -122,5 +122,6 @@ void bimodal_F::begin_prediction_B(){
   // std::cout << "The number of branches analyzed is " << stop_analize << " so consider that in this results " << std::endl;
   // std::cout << "If you want more lines review the code and remove: stop_analize condition " << std::endl;
   //
+
   free(Table);
 } // end all
