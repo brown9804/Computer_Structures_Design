@@ -38,6 +38,7 @@ public:
 
   int ph;
   int ph_mask;
+  int gh_mask;
 
   pTournament_F(std::string filepath,int s, int gh, int ph);
 
