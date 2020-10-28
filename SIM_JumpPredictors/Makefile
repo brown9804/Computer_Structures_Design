@@ -22,7 +22,7 @@ RESULT = ./results/
 SRC = ./src/
 
 #######
-S = 16
+S = 4
 BP = 0
 GH = 4
 PH = 3
