@@ -85,7 +85,7 @@ void bimodal_F::begin_prediction_B(){
   results_file << "Prediction parameters: \n ";
   results_file << "------------------------------------------------------------------------ \n";
   results_file << "Branch prediction type: " << op_mode << std::endl;
-  results_file << "BHT size (entries): " << s << std::endl;
+  results_file << "BHT size (entries): " << Table_Nentry << std::endl;
   results_file << "Global history register size: " << gh << std::endl;
   results_file << "Private history register size: " << ph << std::endl;
   results_file << "------------------------------------------------------------------------ \n";
@@ -104,7 +104,7 @@ void bimodal_F::begin_prediction_B(){
   std::cout << "Prediction parameters: \n ";
   std::cout << "------------------------------------------------------------------------ \n";
   std::cout << "Branch prediction type: " << op_mode << std::endl;
-  std::cout << "BHT size (entries): " << s << std::endl;
+  std::cout << "BHT size (entries): " << Table_Nentry << std::endl;
   std::cout << "Global history register size: " << gh << std::endl;
   std::cout << "Private history register size: " << ph << std::endl;
   std::cout << "------------------------------------------------------------------------ \n";
