@@ -7,6 +7,7 @@ globalHistory_F::globalHistory_F(std::string filepath,int s, int gh, int ph){
     this->s=s; // Branch History Table (BHT) size
     this->gh=gh; //GShare size (given value)
     this->ph=ph; //PShare size (given value)
+    this->ph_mask = (1 << gh) - 1;
     };
 
 void globalHistory_F::begin_prediction_G(){
@@ -17,7 +18,7 @@ void globalHistory_F::begin_prediction_G(){
   int counter_N = 0; // Right Not Taken branches
   char *BHT_t = (char *)calloc(Table_Nentry, sizeof(char));
   int global_history = 0;
-  int mask = pow(2, s) - 1; // mask size for redirecting network
+  int mask = (1 << s) - 1; // mask size for redirecting network
 
   /////////////
   std::string op_mode = "GShared"; // Pshared Private History / Private Shared
@@ -90,7 +91,7 @@ results_file << "---------------------------------------------------------------
 results_file << "Prediction parameters: \n ";
 results_file << "------------------------------------------------------------------------ \n";
 results_file << "Branch prediction type: " << op_mode << std::endl;
-results_file << "BHT_t size (entries): " << s << std::endl;
+results_file << "BHT_t size (entries): " << Table_Nentry << std::endl;
 results_file << "Global history register size: " << gh << std::endl;
 results_file << "Private history register size: " << ph << std::endl;
 results_file << "------------------------------------------------------------------------ \n";
@@ -109,7 +110,7 @@ std::cout << "------------------------------------------------------------------
 std::cout << "Prediction parameters: \n ";
 std::cout << "------------------------------------------------------------------------ \n";
 std::cout << "Branch prediction type: " << op_mode << std::endl;
-std::cout << "BHT_t size (entries): " << s << std::endl;
+std::cout << "BHT_t size (entries): " << Table_Nentry << std::endl;
 std::cout << "Global history register size: " << gh << std::endl;
 std::cout << "Private history register size: " << ph << std::endl;
 std::cout << "------------------------------------------------------------------------ \n";
