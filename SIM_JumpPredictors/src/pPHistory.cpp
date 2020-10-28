@@ -58,13 +58,13 @@ void privateHistory_F::begin_prediction_P(){
       if (result == 'N') {
         counter_N++;
       } else {
-        counter_miss_N++;
+        counter_miss_T++;
       }
     } else {
       if (result == 'T') {
         counter_T++;
       } else {
-        counter_miss_T++;
+        counter_miss_N++;
       }
     }
 
@@ -75,7 +75,8 @@ void privateHistory_F::begin_prediction_P(){
       if (BHT_t[pc_mask_access] > 0) {
         BHT_t[pc_mask_access]--;
       }
-    } else {
+    }
+    else {
       PHT_t[pc_mask_history_access] |= 1;
       // Increment if 3
       if (BHT_t[pc_mask_access] < 3) {
@@ -83,8 +84,8 @@ void privateHistory_F::begin_prediction_P(){
       }
     }
 
-num_branch=num_branch+1;
-}
+      num_branch = num_branch + 1;
+    }
 
 time(&final_time); // capture time
 int ex_time = difftime(final_time,current_time);
