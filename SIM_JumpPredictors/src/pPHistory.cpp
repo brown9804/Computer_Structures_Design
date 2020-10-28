@@ -6,7 +6,7 @@ privateHistory_F::privateHistory_F(std::string filepath,int s, int gh, int ph){
     this->s=s; // Branch History Table (BHT_t) size
     this->gh=gh; //GShare size (given value)
     this->ph=ph; //PShare size (given value)
-    this->ph_mask=(1 << (ph + 1)) - 1;
+    this->ph_mask=(1 << ph) - 1;
     };
 
 void privateHistory_F::begin_prediction_P(){
@@ -16,7 +16,7 @@ void privateHistory_F::begin_prediction_P(){
   int counter_T = 0; // Right Taken branches
   int counter_N = 0; // Right Not Taken branches
   char *BHT_t = (char *)calloc(Table_Nentry, sizeof(char));
-  int *PHT_t = (int *)calloc(Table_Nentry, sizeof(int)); // Branch History Table
+  int *PHT_t = (int *)calloc((1 << ph), sizeof(int)); // Branch History Table
   int mask = pow(2, s) - 1; // mask size for redirecting network
 
 
@@ -96,7 +96,7 @@ results_file << "---------------------------------------------------------------
 results_file << "Prediction parameters: \n ";
 results_file << "------------------------------------------------------------------------ \n";
 results_file << "Branch prediction type: " << op_mode << std::endl;
-results_file << "BHT_t size (entries): " << s << std::endl;
+results_file << "BHT_t size (entries): " << Table_Nentry  << std::endl;
 results_file << "Global history register size: " << gh << std::endl;
 results_file << "Private history register size: " << ph << std::endl;
 results_file << "------------------------------------------------------------------------ \n";
@@ -115,7 +115,7 @@ std::cout << "------------------------------------------------------------------
 std::cout << "Prediction parameters: \n ";
 std::cout << "------------------------------------------------------------------------ \n";
 std::cout << "Branch prediction type: " << op_mode << std::endl;
-std::cout << "BHT_t size (entries): " << s << std::endl;
+std::cout << "BHT_t size (entries): " << Table_Nentry << std::endl;
 std::cout << "Global history register size: " << gh << std::endl;
 std::cout << "Private history register size: " << ph << std::endl;
 std::cout << "------------------------------------------------------------------------ \n";
