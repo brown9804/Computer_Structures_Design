@@ -107,13 +107,13 @@ void pTournament_F::begin_prediction_T(){
       if (result == 'N') {
         counter_N++;
       } else {
-        counter_miss_N++;
+        counter_miss_T++;
       }
     } else {
       if (result == 'T') {
         counter_T++;
       } else {
-        counter_miss_T++;
+        counter_miss_N++;
       }
     }
 
