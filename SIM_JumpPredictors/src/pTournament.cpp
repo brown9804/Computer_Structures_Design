@@ -6,6 +6,8 @@ pTournament_F::pTournament_F(std::string filepath,int s, int gh, int ph){
     this->s=s; // Branch History Table (BHT) size
     this->gh=gh; //GShare size (given value)
     this->ph=ph; //PShare size (given value)
+    this->ph_mask = (1 << ph) - 1;
+    this->gh_mask = (1 << gh) - 1;
     };
 
 void pTournament_F::begin_prediction_T(){
@@ -16,21 +18,19 @@ void pTournament_F::begin_prediction_T(){
   int counter_N = 0; // Right Not Taken branches
   // Private predictor
   char *BHT_t = (char *)calloc(Table_Nentry, sizeof(char));
-  int *PHT_t = (int *)calloc(Table_Nentry, sizeof(int)); // Branch History Table
+  int *PHT_t = (int *)calloc((1 << ph), sizeof(int)); // Branch History Table
   char private_prediction;
   // Global predictor
   int global_history = 0;
-  char *gBHT_t = (char *)calloc(Table_Nentry, sizeof(char));
+  char *gBHT_t = (char *)calloc((1 << gh), sizeof(char));
   char global_prediction;
   // Meta predictor
   char *mBHT_t = (char *)calloc(Table_Nentry, sizeof(char));
   char meta_prediction;
-
   int mask = pow(2, s) - 1; // mask size for redirecting network
 
-
   /////////////
-  std::string op_mode = "PShared"; // Pshared Private History / Private Shared
+  std::string op_mode = "Tournament"; // Pshared Private History / Private Shared
   int num_branch = 0; // number of branches (jumps)
   /////////
   time_t current_time;
@@ -52,9 +52,9 @@ void pTournament_F::begin_prediction_T(){
     }
 
     // Calc private history prediction
-    long pc_mask_history_access = pc_dd & mask;
+    long pc_mask_history_access = pc_dd & ph_mask;
     // Predicting
-    long pc_mask_access = (PHT_t[pc_mask_history_access] ^ pc_dd) & mask;
+    long pc_mask_access = (PHT_t[pc_mask_history_access] ^ pc_dd) & ph_mask;
     private_prediction = BHT_t[pc_mask_access];
 
     // Adjust counters based on result
@@ -74,11 +74,11 @@ void pTournament_F::begin_prediction_T(){
 
 
     // Calculate global prediction
-    pc_mask_access = (global_history ^ pc_dd) & mask;
+    pc_mask_access = (global_history ^ pc_dd) & gh_mask;
     global_prediction = gBHT_t[pc_mask_access];
 
     // Adjust counters based on result
-    global_history = (global_history << 1) & ph_mask;
+    global_history = (global_history << 1) & gh_mask;
     if (result == 'N') {
       // Decrement if not 0
       if (gBHT_t[pc_mask_access] > 0) {
@@ -143,7 +143,7 @@ void pTournament_F::begin_prediction_T(){
   results_file << "Prediction parameters: \n ";
   results_file << "------------------------------------------------------------------------ \n";
   results_file << "Branch prediction type: " << op_mode << std::endl;
-  results_file << "BHT_t size (entries): " << s << std::endl;
+  results_file << "BHT_t size (entries): " << Table_Nentry << std::endl;
   results_file << "Global history register size: " << gh << std::endl;
   results_file << "Private history register size: " << ph << std::endl;
   results_file << "------------------------------------------------------------------------ \n";
@@ -162,7 +162,7 @@ void pTournament_F::begin_prediction_T(){
   std::cout << "Prediction parameters: \n ";
   std::cout << "------------------------------------------------------------------------ \n";
   std::cout << "Branch prediction type: " << op_mode << std::endl;
-  std::cout << "BHT_t size (entries): " << s << std::endl;
+  std::cout << "BHT_t size (entries): " << Table_Nentry << std::endl;
   std::cout << "Global history register size: " << gh << std::endl;
   std::cout << "Private history register size: " << ph << std::endl;
   std::cout << "------------------------------------------------------------------------ \n";
