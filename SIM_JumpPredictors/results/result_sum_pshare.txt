@@ -2,16 +2,16 @@
 Prediction parameters: 
  ------------------------------------------------------------------------ 
 Branch prediction type: PShared
-BHT_t size (entries): 16
+BHT_t size (entries): 32
 Global history register size: 4
 Private history register size: 3
 ------------------------------------------------------------------------ 
 Simulation results: 
 ------------------------------------------------------------------------
 Number of branch: 16416279
-Number of correct prediction of taken branches: 5466881
-Number of incorrect prediction of taken branches: 609335
-Correct prediction of not taken branches: 9595349
-Incorrect prediction of not taken branches: 744714
-Percentage of correct predictions: 91.7518%
-Time running: 26
+Number of correct prediction of taken branches: 2862181
+Number of incorrect prediction of taken branches: 3349414
+Correct prediction of not taken branches: 8161471
+Incorrect prediction of not taken branches: 2043213
+Percentage of correct predictions: 67.1507%
+Time running: 32
