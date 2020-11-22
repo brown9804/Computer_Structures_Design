@@ -1,6 +1,5 @@
 # 			C++ proyect
 
-# Making verilog makefile
 ###
 ######## belindabrownr@gmail.com
 ###
